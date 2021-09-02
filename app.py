@@ -1,37 +1,26 @@
-from flask import Flask, jsonify, request
+from typing import List
+from flask import Flask, render_template 
 
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
-    return "<h1>hello</h1>"
-
-@app.route('/home', methods=['POST','GET'])
-def home():
-    return "welcome to home page"
-
-@app.route('/json')
-def json():
-    return jsonify({"key":"value","key":[10,20,30,40]})
+    person = "Now you are going to learn how we can add"
+    # persons = [20,30,40,50]
+    # di = {"name":"nitin"}
+    # fruits = ["mango","banana","orange"]
+    return render_template('basic2.html',person=person)#if you want to pass any veriable in tamplate and u hv to call in html file 
 
 
-@app.route('/person/<name>', methods=['GET','POST'])
+@app.route('/person/<name>')
 def person(name):
-    return "<h1> hi,{}.welcome to person page</h1>".format(name)
+    return render_template('person.html', name=name)
 
-
-@app.route('/query')
-def query():
-    name = request.args.get('name')
-    location = request.args.get('location')
-    return '<h1>Hi, {}. you are from {}. you are on the query page</h>'.format(name, location)  
 
 
 if __name__  == "__main__":
     app.run(debug=True)
 
 
-@app.route('/theform')
-def theform():
-    return '''<from mathod = "POST" action="/proce'''
